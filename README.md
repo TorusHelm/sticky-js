@@ -16,7 +16,7 @@
 ## Install
 
 ````
-npm install sticky-js
+npm install sticky-js-reworked
 ````
 
 ````
