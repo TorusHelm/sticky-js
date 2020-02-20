@@ -3,6 +3,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+const MySimpleEvent = new Event("MySimpleEvent");
 
 /**
  * Sticky.js
@@ -39,7 +40,16 @@ function () {
       marginTop: options.marginTop || 0,
       stickyFor: options.stickyFor || 0,
       stickyClass: options.stickyClass || null,
-      stickyContainer: options.stickyContainer || 'body'
+      stickySubtarget: options.stickySubtarget || null,
+      stickySubtargetClass: options.stickySubtargetClass || null,
+      stickyContainer: options.stickyContainer || 'body',
+      on: {
+        MySimpleEvent: function() {
+          this.addEventListener("MySimpleEvent", function() {
+            options.on.MySimpleEvent || null;
+          })
+        }
+      }
     };
     this.updateScrollTopPosition = this.updateScrollTopPosition.bind(this);
     this.updateScrollTopPosition();
@@ -88,6 +98,8 @@ function () {
       element.sticky.marginTop = parseInt(element.getAttribute('data-margin-top')) || this.options.marginTop;
       element.sticky.stickyFor = parseInt(element.getAttribute('data-sticky-for')) || this.options.stickyFor;
       element.sticky.stickyClass = element.getAttribute('data-sticky-class') || this.options.stickyClass;
+      element.sticky.stickySubtarget = element.getAttribute('data-sticky-subtarget') || this.options.stickySubtarget;
+      element.sticky.stickySubtargetClass = element.getAttribute('data-sticky-subtarget-class') || this.options.stickySubtargetClass;
       element.sticky.wrap = element.hasAttribute('data-sticky-wrap') ? true : this.options.wrap; // @todo attribute for stickyContainer
       // element.sticky.stickyContainer = element.getAttribute('data-sticky-container') || this.options.stickyContainer;
 
@@ -291,12 +303,28 @@ function () {
             element.classList.remove(element.sticky.stickyClass);
           }
 
+          if (element.sticky.stickySubtarget && element.sticky.stickySubtargetClass) {
+            let subtargets = document.querySelectorAll(element.sticky.stickySubtargetClass);
+            for (let i = 0; i < subtargets.length; i++) {
+              const subtarget = subtargets[i];
+              subtarget.classList.remove(element.sticky.stickySubtargetClass);
+            }
+          }
+
           this.css(element, {
             top: element.sticky.container.rect.top + element.sticky.container.offsetHeight - (this.scrollTop + element.sticky.rect.height) + 'px'
           });
         } else {
           if (element.sticky.stickyClass) {
             element.classList.add(element.sticky.stickyClass);
+          }
+
+          if (element.sticky.stickySubtarget && element.sticky.stickySubtargetClass) {
+            let subtargets = document.querySelectorAll(element.sticky.stickySubtargetClass);
+            for (let i = 0; i < subtargets.length; i++) {
+              const subtarget = subtargets[i];
+              subtarget.classList.add(element.sticky.stickySubtargetClass);
+            }
           }
 
           this.css(element, {
@@ -306,6 +334,14 @@ function () {
       } else {
         if (element.sticky.stickyClass) {
           element.classList.remove(element.sticky.stickyClass);
+        }
+
+        if (element.sticky.stickySubtarget && element.sticky.stickySubtargetClass) {
+          let subtargets = document.querySelectorAll(element.sticky.stickySubtargetClass);
+          for (let i = 0; i < subtargets.length; i++) {
+            const subtarget = subtargets[i];
+            subtarget.classList.remove(element.sticky.stickySubtargetClass);
+          }
         }
 
         this.css(element, {
@@ -439,6 +475,9 @@ function () {
     key: "updateScrollTopPosition",
     value: function updateScrollTopPosition() {
       this.scrollTop = (window.pageYOffset || document.scrollTop) - (document.clientTop || 0) || 0;
+      if (element.sticky.MySimpleEvent) {
+        this.dispatchEvent(MySimpleEvent);
+      }
     }
     /**
      * Helper function for loops
