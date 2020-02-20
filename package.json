@@ -1,6 +1,6 @@
 {
   "name": "sticky-js-reworked",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Sticky elements",
   "main": "index.js",
   "scripts": {
