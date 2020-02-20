@@ -74,7 +74,7 @@
   </head>
   <body>
 
-    <header class="top-bar" data-sticky>
+    <header class="top-bar test-target subtarget" data-sticky>
       <div class="top-bar-left">
         <ul class="menu">
           <li class="menu-text"><h1>Sticky.js</h1></li>
@@ -91,7 +91,7 @@
 
       <section class="container" data-sticky-container>
         <div class="row column">
-          <img src="http://placehold.it/250x250" class="float-left" alt="Sticky" data-sticky data-sticky-for="1023" data-sticky-class="is-sticky" data-margin-top="100">
+          <img src="http://placehold.it/250x250" class="float-left" alt="Sticky" data-sticky data-sticky-for="1023" data-margin-top="100" data-sticky-class="test2">
           <div class="float-right">
             <img src="http://placehold.it/250x250" alt="Sticky" data-sticky data-sticky-wrap data-margin-top="100">
             <img src="http://placehold.it/250x125/ecf0f1?text=Not+sticky" alt="Not sticky">
@@ -117,8 +117,12 @@
     <script src="../dist/sticky.compile.js"></script>
 
     <script>
+      var mySubtarget = document.querySelector('.subtarget');
 
-      var sticky = new Sticky('[data-sticky]', {});
+      var sticky = new Sticky('[data-sticky]', {
+        maringTop: 100,
+        subtarget: mySubtarget
+      });
 
     </script>
 
