@@ -1,6 +1,6 @@
 {
   "name": "sticky-js",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Sticky elements",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rgalus/sticky-js.git"
+    "url": "git+https://github.com/TorusHelm/sticky-js-reworked.git"
   },
   "keywords": [
     "sticky",
@@ -18,12 +18,12 @@
     "scroll",
     "javascript"
   ],
-  "author": "rgalus <biuro@rafalgalus.pl>",
+  "author": "TorusHelm <TorusHolm@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rgalus/sticky-js/issues"
+    "url": "https://github.com/TorusHelm/sticky-js-reworked/issues"
   },
-  "homepage": "https://github.com/rgalus/sticky-js#readme",
+  "homepage": "https://github.com/TorusHelm/sticky-js-reworked#readme",
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/preset-env": "^7.7.7",
