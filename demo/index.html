@@ -121,7 +121,9 @@
 
       var sticky = new Sticky('[data-sticky]', {
         maringTop: 100,
-        subtarget: mySubtarget
+        onSticked: function() {
+          console.log("TEST");
+        }
       });
 
     </script>

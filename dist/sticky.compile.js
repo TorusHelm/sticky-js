@@ -39,7 +39,6 @@ function () {
       marginTop: options.marginTop || 0,
       stickyFor: options.stickyFor || 0,
       stickyClass: options.stickyClass || null,
-      subtarget: options.subtarget || null,
       stickyContainer: options.stickyContainer || 'body'
     };
     this.updateScrollTopPosition = this.updateScrollTopPosition.bind(this);
@@ -89,7 +88,6 @@ function () {
       element.sticky.marginTop = parseInt(element.getAttribute('data-margin-top')) || this.options.marginTop;
       element.sticky.stickyFor = parseInt(element.getAttribute('data-sticky-for')) || this.options.stickyFor;
       element.sticky.stickyClass = element.getAttribute('data-sticky-class') || this.options.stickyClass;
-      element.sticky.subtarget = element.getAttribute('data-subtarget') ? document.querySelector(element.getAttribute('data-subtarget')) : false || this.options.subtarget;
       element.sticky.wrap = element.hasAttribute('data-sticky-wrap') ? true : this.options.wrap; // @todo attribute for stickyContainer
       // element.sticky.stickyContainer = element.getAttribute('data-sticky-container') || this.options.stickyContainer;
 
@@ -291,10 +289,6 @@ function () {
         if (this.scrollTop + element.sticky.rect.height + element.sticky.marginTop > element.sticky.container.rect.top + element.sticky.container.offsetHeight) {
           if (element.sticky.stickyClass) {
             element.classList.remove(element.sticky.stickyClass);
-
-            if (this.options.subtarget) {
-              this.options.subtarget.classList.remove('dom-has-sticky');
-            }
           }
 
           this.css(element, {
@@ -303,10 +297,6 @@ function () {
         } else {
           if (element.sticky.stickyClass) {
             element.classList.add(element.sticky.stickyClass);
-
-            if (this.options.subtarget) {
-              this.options.subtarget.classList.add('dom-has-sticky');
-            }
           }
 
           this.css(element, {
@@ -316,10 +306,6 @@ function () {
       } else {
         if (element.sticky.stickyClass) {
           element.classList.remove(element.sticky.stickyClass);
-
-          if (this.options.subtarget) {
-            this.options.subtarget.classList.remove('dom-has-sticky');
-          }
         }
 
         this.css(element, {
